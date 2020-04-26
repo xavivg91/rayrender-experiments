@@ -12,4 +12,4 @@ Playing with [@tylermorganwall](https://twitter.com/tylermorganwall)'s rayrender
 * **Mario and Goombas**. Mario dodging some Goombas and jumping to hit the block. Will there be a mushroom inside?
 
 
-<img src='Mario and Goombas/mario-and-goombas.gif' align="center" height="400" /></a>
+<img src='Mario and Goombas/mario-and-goombas.gif' align="center" height="350" /></a>
