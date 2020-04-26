@@ -11,4 +11,4 @@ Playing with [@tylermorganwall](https://twitter.com/tylermorganwall)'s rayrender
 
 * Mario and Goombas
 
-<img src="Mario and Goombas/mario-and-goombas.mp4" align="center" height="139" /></a>
+<img src='Mario and Goombas/mario-and-goombas.gif' align="left" height="400" /></a>
