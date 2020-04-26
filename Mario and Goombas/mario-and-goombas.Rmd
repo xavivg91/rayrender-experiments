@@ -1,0 +1,195 @@
+
+
+```{r}
+# Load library
+library(rayrender)
+
+# Generate ground
+scene=generate_ground(material=diffuse(color="#000000",
+                                       noise=1/10,
+                                       noisecolor="#A0522D")) %>%
+  add_object(sphere(x=-30, y=90, radius=40, material=light(intensity=10)))
+
+# White - 0
+# Cap - 1
+# Skin - 2
+# Hair - 3
+# Eye and mustache - 4
+# Overall - 5
+# Shoes - 6
+# Buttons - 7
+
+# Mario matrix
+mario=matrix(c(0,0,0,0,0,1,1,1,1,1,0,0,2,2,2,0,
+               0,0,0,0,1,1,1,1,1,1,1,1,1,2,2,0,
+               0,0,0,0,3,3,3,2,2,4,2,0,1,1,1,0,
+               0,0,0,3,2,3,2,2,2,4,2,2,2,1,1,0,
+               0,0,0,3,2,3,3,2,2,2,4,2,2,2,1,0,
+               0,0,0,3,3,2,2,2,2,4,4,4,4,1,0,0,
+               0,0,0,0,0,2,2,2,2,2,2,2,1,1,0,0,
+               0,0,1,1,1,1,5,1,1,1,5,1,1,0,0,6,
+               2,2,1,1,1,1,1,5,1,1,1,5,0,0,6,6,
+               2,2,2,1,1,1,1,5,5,5,5,7,5,5,6,6,
+               0,2,0,0,5,1,5,5,7,5,5,5,5,5,6,6,
+               0,0,6,6,6,5,5,5,5,5,5,5,5,5,6,6,
+               0,6,6,6,5,5,5,5,5,5,0,0,0,0,0,0,
+               0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0),
+             ncol=16, byrow=TRUE)
+
+# Mario colors
+cap="red"
+skin="#c58c85" 
+hair="#5c2f00"
+eye="black"
+overall="blue"
+shoes="#211100"
+buttons="yellow"
+
+# Generate Mario colors
+for(i in 1:ncol(mario)) {
+  for(j in 1:nrow(mario)) {
+    if(mario[j,i]!=0) {
+      if(mario[j,i]==1) {
+        colorval=cap
+        material=diffuse(color=colorval)
+      } else if (mario[j,i]==2) {
+        colorval=skin
+        material=diffuse(color=colorval)
+      } else if (mario[j,i]==3) {
+        colorval=hair
+        material=diffuse(color=colorval)      
+      } else if (mario[j,i]==4) {
+        colorval=eye
+        material=diffuse(color=colorval)
+      } else if (mario[j,i]==5) {
+        colorval=overall
+        material=diffuse(color=colorval)   
+      } else if (mario[j,i]==6) {
+        colorval=shoes
+        material=diffuse(color=colorval)  
+      } else if (mario[j,i]==7) {
+        colorval=buttons
+        material=diffuse(color=colorval)   
+      }
+      
+      # Add object
+      scene=add_object(scene, cube(y=27-j, z=i-8, material=material))
+    }
+  }
+}
+
+# Goomba matrix
+goomba=matrix(c(0,0,0,0,0,0,8,8,8,8,0,0,0,0,0,0,
+                0,0,0,0,0,8,8,8,8,8,8,0,0,0,0,0,
+                0,0,0,0,8,8,8,8,8,8,8,8,0,0,0,0,
+                0,0,0,8,8,8,8,8,8,8,8,8,8,0,0,0,
+                0,0,8,4,4,8,8,8,8,8,8,4,4,8,0,0,
+                0,8,8,8,9,4,8,8,8,8,4,9,8,8,8,0,
+                0,8,8,8,9,4,4,4,4,4,4,9,8,8,8,0,
+                8,8,8,8,9,4,9,8,8,9,4,9,8,8,8,8,
+                8,8,8,8,9,9,9,8,8,9,9,9,8,8,8,8,
+                8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
+                0,8,8,8,8,9,9,9,9,9,9,8,8,8,8,0,
+                0,0,0,0,9,9,9,9,9,9,9,9,0,0,0,0,
+                0,0,4,4,9,9,9,9,9,9,9,9,0,0,0,0,
+                0,4,4,4,4,4,9,9,9,9,9,4,4,0,0,0,
+                0,4,4,4,4,4,4,9,9,9,4,4,4,0,0,0,
+                0,0,4,4,4,4,4,9,9,4,4,4,0,0,0,0),
+             ncol=16, byrow=TRUE)
+
+# Goomba colors
+goomba8="#422200"
+goomba4="black"
+goomba9="#FFDEAD"
+
+# Generate Goomba colors
+for(i in 1:ncol(goomba)) {
+  for(j in 1:nrow(goomba)) {
+    if(goomba[j,i]!=0) {
+      if(goomba[j,i]==8) {
+        colorval=goomba8
+        material=diffuse(color=colorval)
+      } else if (goomba[j,i]==4) {
+        colorval=goomba4
+        material=diffuse(color=colorval)
+      } else if (goomba[j,i]==9) {
+        colorval=goomba9
+        material=diffuse(color=colorval) 
+      }
+      
+      # Add objects
+      scene=add_object(scene, cube(y=16-j, z=i-40, x=40, material=material)) 
+      scene=add_object(scene, cube(y=16-j, z=i+24, x=32, material=material))
+      scene=add_object(scene, cube(y=16-j, z=i-24, x=-10, material=material))
+      scene=add_object(scene, cube(y=16-j, z=i+20, x=-2, material=material))
+
+    }
+  }
+}
+
+# Block matrix
+block=matrix(c(0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+               1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+               1,2,4,2,2,2,2,2,2,2,2,2,2,4,2,
+               1,2,2,2,2,1,1,1,1,1,2,2,2,2,2,
+               1,2,2,2,1,1,4,4,4,1,1,2,2,2,2,
+               1,2,2,2,1,1,4,2,2,1,1,4,2,2,2,
+               1,2,2,2,1,1,4,2,2,1,1,4,2,2,2,
+               1,2,2,2,2,4,4,2,1,1,1,4,2,2,2,
+               1,2,2,2,2,2,2,1,1,4,4,4,2,2,2,
+               1,2,2,2,2,2,2,1,1,4,2,2,2,2,2,
+               1,2,2,2,2,2,2,2,4,4,2,2,2,2,2,
+               1,2,2,2,2,2,2,1,1,2,2,2,2,2,2,
+               1,2,2,2,2,2,2,1,1,4,2,2,2,2,2,
+               1,2,4,2,2,2,2,2,4,4,2,2,2,4,2,
+               1,2,2,2,2,2,2,2,2,2,2,2,2,2,2),
+             ncol=15, byrow=TRUE)
+
+# Block colors
+block1="#e67e00"
+block2="black"
+block3="#FFD700"
+
+# Generate Block colors
+for(i in 1:ncol(block)) {
+  for(j in 1:nrow(block)) {
+    if(block[j,i]!=0) {
+      if(block[j,i]==1) {
+        colorval=block1
+        material=diffuse(color=colorval)
+      } else if (block[j,i]==4) {
+        colorval=block2
+        material=diffuse(color=colorval)
+      } else if (block[j,i]==2) {
+        colorval=block3
+        material=diffuse(color=colorval) 
+      }
+      
+      # Add object
+      scene=add_object(scene, cube(y=43-j, z=i+13, material=material))
+
+    }
+  }
+}
+
+# Render scene
+par(mfrow=c(1,1))
+render_scene(scene, fov=30, width=1000, height=750, samples=500,
+             parallel=TRUE, lookfrom=c(-95,35,0), lookat=c(0,16,0))
+```
+
+```{r}
+# Generate animation
+frames=100
+camerax=-95*cos(seq(0,360,length.out=frames+1)[-frames-1]*pi/180)
+cameraz=95*sin(seq(0,360,length.out=frames+1)[-frames-1]*pi/180)
+
+av::av_capture_graphics(expr={
+  for(i in 1:frames) {
+    render_scene(scene, width=1000, height=750, fov=35,
+                 lookfrom = c(camerax[i], 35, cameraz[i]),
+                 lookat=c(0,16,0), samples=1000, parallel=TRUE)
+  }
+}, width=500,height=500, framerate=60, output="mario.mp4")
+```
+
