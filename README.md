@@ -9,7 +9,7 @@
 
 Playing with [@tylermorganwall](https://twitter.com/tylermorganwall)'s rayrender R package to render cool and weird things. I will update this repository with new scenes or animations, I hope you like it!
 
-* **Mario and Goombas**. Mario dodging some goombas and jumping to hit the block. Will there be a mushroom inside?
+* **Mario and Goombas**. Mario dodging some Goombas and jumping to hit the block. Will there be a mushroom inside?
 
 
 <img src='Mario and Goombas/mario-and-goombas.gif' align="center" height="400" /></a>
