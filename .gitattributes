@@ -1,1 +1,2 @@
-*.pdf linguist-language=R
+*.Rmd linguist-language=R
+*.mp4 linguist-language=R
