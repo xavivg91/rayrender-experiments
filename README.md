@@ -13,7 +13,7 @@ Playing with [@tylermorganwall](https://twitter.com/tylermorganwall)'s rayrender
 
 <img src='Mario and Goombas/mario-and-goombas.gif' align="center" height="350" /></a>
 
-* **Link and Navi**. _"Hey!"_, _"Listen"_, _"Watch out!"_, _"Look"_, etc. Shut the fuck up Navi, I don't want to hear you anymore!
+* **Link and Navi**. _"Hey!"_, _"Listen"_, _"Watch out!"_, _"Look!"_, etc. Shut the fuck up Navi, I don't want to hear you anymore!
 
 <img src='Link and Navi/link-and-navi.gif' align="center" height="350" /></a>
 
