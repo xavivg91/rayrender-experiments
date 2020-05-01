@@ -1,0 +1,167 @@
+
+```{r}
+# Load library
+library(rayrender)
+
+# Link matrix
+link=matrix(c(0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,
+              0,0,0,0,0,1,2,3,3,3,3,2,1,0,0,0,0,0,
+              0,0,0,0,1,2,3,3,3,3,3,3,2,1,0,0,0,0,
+              0,0,0,1,2,3,2,2,2,2,2,2,3,2,1,0,0,0,
+              0,0,0,1,3,4,5,5,5,6,6,6,4,3,1,0,0,0,
+              0,0,1,2,4,5,6,6,6,6,6,6,6,4,2,1,0,0,
+              0,0,1,1,6,6,7,6,6,6,7,4,6,5,1,1,8,0,
+              1,9,9,4,6,4,6,6,6,6,4,8,4,6,4,9,9,1,
+              0,1,8,1,4,7,6,6,7,1,8,9,4,6,4,8,1,0,
+              0,10,1,7,1,7,7,4,1,8,9,9,8,1,7,1,10,0,
+              0,0,1,6,4,1,4,8,8,9,9,4,4,4,6,1,0,0,
+              0,0,1,5,1,11,2,4,9,9,4,2,11,1,5,1,0,0,
+              0,0,0,1,1,9,2,11,9,9,11,2,9,1,1,0,0,0,
+              0,0,0,0,1,4,9,9,9,9,9,9,4,1,0,0,0,0,
+              0,0,0,1,3,1,1,8,8,8,8,1,1,3,1,0,0,0,
+              0,0,1,3,3,2,2,2,2,2,2,2,2,3,3,1,0,0,
+              0,1,9,9,1,1,2,2,2,2,2,2,1,1,9,9,1,0,
+              0,1,8,9,2,3,1,1,5,6,1,1,3,2,9,8,1,0,
+              0,0,1,1,1,3,3,2,6,7,2,3,3,1,1,1,0,0,
+              0,0,0,0,1,1,2,3,3,3,3,2,1,1,0,0,0,0,
+              0,0,0,1,4,4,1,1,1,1,1,1,4,4,1,0,0,0,
+              0,0,0,1,4,4,4,1,0,0,1,4,4,4,1,0,0,0,
+              0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0),
+            ncol=18, byrow=TRUE)
+
+# Link colors
+link1="black"
+link2="#228B22" 
+link3="#32CD32"
+link4="#8B4513"
+link5="yellow"
+link6="#FFA500"
+link7="#FF8C00"
+link8="#FF7E47"
+link9="#FFC98C"
+link10="blue"
+link11="white"
+
+# Navi matrix
+navi=matrix(c(1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+              1,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,1,
+              1,2,1,2,2,1,0,0,0,0,0,0,0,0,0,1,2,2,1,2,1,
+              1,2,2,1,2,2,1,0,0,0,0,0,0,0,1,2,2,1,2,2,1,
+              1,2,2,1,2,2,1,0,0,3,3,3,0,0,1,2,2,1,2,2,1,
+              0,1,1,2,2,1,2,1,3,3,4,3,3,1,2,1,2,2,1,1,0,
+              0,0,0,1,1,2,1,3,3,4,5,4,3,3,1,2,1,1,0,0,0,
+              0,0,0,0,0,1,3,3,4,5,2,5,4,3,3,1,0,0,0,0,0,
+              0,0,0,0,0,0,3,4,5,2,2,2,5,4,3,0,0,0,0,0,0,
+              0,0,0,0,0,0,3,3,4,5,2,5,4,3,3,0,0,0,0,0,0,
+              0,0,0,0,0,0,1,3,3,4,5,4,3,3,1,0,0,0,0,0,0,
+              0,0,0,0,0,1,2,1,3,3,4,3,3,1,2,1,0,0,0,0,0,
+              0,0,0,0,1,2,1,2,1,3,3,3,1,2,1,2,1,0,0,0,0,
+              0,0,0,0,1,2,2,1,0,0,0,0,0,1,2,2,1,0,0,0,0,
+              0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,1,0,0,0,0),
+            ncol=21, byrow=TRUE)
+
+# Navi colors
+navi1="#A9A9A9"
+navi2="white" 
+navi3="#4169E1"
+navi4="#1E90FF"
+navi5="#00FFFF"
+
+scenes=list()
+frames=100
+
+# Object movement
+positionx=-30*cos(seq(0,360,length.out=frames+1)[-frames-1]*pi/180)
+positionz=30*sin(seq(0,360,length.out=frames+1)[-frames-1]*pi/180)
+
+# Animation
+av::av_capture_graphics(expr={
+for(p in 1:frames) { 
+  
+  # Generate ground
+scene=generate_ground() %>%
+  add_object(sphere(x=-30, y=100, radius=30, material=light(intensity=10)))
+
+
+# Generate Link colors
+for(i in 1:ncol(link)) {
+  for(j in 1:nrow(link)) {
+    if(link[j,i]!=0) {
+      if(link[j,i]==1) {
+        colorval=link1
+        material=diffuse(color=colorval)
+      } else if (link[j,i]==2) {
+        colorval=link2
+        material=diffuse(color=colorval)
+      } else if (link[j,i]==3) {
+        colorval=link3
+        material=diffuse(color=colorval)      
+      } else if (link[j,i]==4) {
+        colorval=link4
+        material=diffuse(color=colorval)
+      } else if (link[j,i]==5) {
+        colorval=link5
+        material=diffuse(color=colorval)   
+      } else if (link[j,i]==6) {
+        colorval=link6
+        material=diffuse(color=colorval)  
+      } else if (link[j,i]==7) {
+        colorval=link7
+        material=diffuse(color=colorval)   
+      } else if (link[j,i]==8) {
+        colorval=link8
+        material=diffuse(color=colorval)   
+      } else if (link[j,i]==9) {
+        colorval=link9
+        material=diffuse(color=colorval)   
+      } else if (link[j,i]==10) {
+        colorval=link10
+        material=diffuse(color=colorval)   
+      } else if (link[j,i]==11) {
+        colorval=link11
+        material=diffuse(color=colorval)   
+      }
+      
+      # Add object
+      scene=add_object(scene, cube(y=22.5-j, z=i-8, material=material))
+    }
+  }
+}
+
+# Generate Navi colors
+for(i in 1:ncol(navi)) {
+  for(j in 1:nrow(navi)) {
+    if(navi[j,i]!=0) {
+      if(navi[j,i]==1) {
+        colorval=navi1
+        material=diffuse(color=colorval)
+      } else if (navi[j,i]==2) {
+        colorval=navi2
+        material=diffuse(color=colorval)
+      } else if (navi[j,i]==3) {
+        colorval=navi3
+        material=diffuse(color=colorval)      
+      } else if (navi[j,i]==4) {
+        colorval=navi4
+        material=diffuse(color=colorval)
+      } else if (navi[j,i]==5) {
+        colorval=navi5
+        material=diffuse(color=colorval)   
+      } 
+       # Add object
+         scene=add_object(scene, cube(x=positionx[p], y=29-j, z=positionz[p]-i+8, 
+                                     material=material))
+      
+      }
+ 
+    }
+}
+scenes[[p]]= scene  
+  # Render scene
+render_scene(scenes[[p]], fov=30, width=1000, height=750, samples=500,
+             parallel=TRUE, lookfrom=c(-95,35,0), lookat=c(0,16,0))
+}} , width=500,height=500, framerate=60, output="link.mp4")
+```
+```
+
+
