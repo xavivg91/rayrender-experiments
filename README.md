@@ -13,6 +13,11 @@ Playing with [@tylermorganwall](https://twitter.com/tylermorganwall)'s rayrender
 
 <img src='Mario and Goombas/mario-and-goombas.gif' align="center" height="350" /></a>
 
+* **Link and Navi**. Leave me alone, I don't want to hear you anymore, Navi!
+
+<img src='Link and Navi/link-and-navi.gif' align="center" height="350" /></a>
+
+
 I've had to change the resulting animations from MP4 to GIF so that they can be displayed correctly here. The animations are not so smooth, but if you want to download and view the original animations, you can do it through the corresponding folders.
 
 
