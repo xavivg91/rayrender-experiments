@@ -13,15 +13,21 @@ Playing with [@tylermorganwall](https://twitter.com/tylermorganwall)'s rayrender
 
 * **Mario and Goombas**. Mario dodging some Goombas and jumping to hit the interrogation block. Will there be a mushroom inside?
 
-<img src='Mario and Goombas/mario-and-goombas.gif' align="center" height="350" /></a>
+<p align="center">
+<img src='Mario and Goombas/mario-and-goombas.gif' height="350" /></a>
+</p>
 
 * **Link and Navi**. _"Hey!"_, _"Listen"_, _"Watch out!"_, _"Look!"_, etc. Shut the fuck up Navi, I don't want to hear you anymore!
 
-<img src='Link and Navi/link-and-navi.gif' align="center" height="350" /></a>
+<p align="center">
+<img src='Link and Navi/link-and-navi.gif' height="350" /></a>
+</p>
 
 * **Freezer**. _"Namek will blow up in 5 minutes!"_ Yeah, sure...
 
+<p align="center">
 <img src='Freezer/freezer.gif' align="center" height="350" /></a>
+</p>
 
 I've had to change the resulting animations from MP4 to GIF so that they can be displayed correctly here. The animations are not so smooth, but if you want to download and view the original animations, you can do it through the corresponding folders.
 
