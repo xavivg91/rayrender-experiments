@@ -1,4 +1,4 @@
-# rayrender experiments
+# rayrender experiments <img src='mario.gif' align="right" height="105" /></a>
 
 <!-- badges: start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
